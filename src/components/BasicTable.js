@@ -11,6 +11,24 @@ const getTableHeaders = (object = {}) => {
   return Object.keys(object);
 }
 
+const getLeader = (scoreData) => {
+  const teachers = Object.keys(scoreData);
+  let currentLeader = {
+    teacher: '',
+    score: 0,
+  };
+  teachers.forEach((teacher) => {
+    if (scoreData[teacher] > currentLeader.score) {
+      currentLeader = {
+        teacher,
+        score: scoreData[teacher],
+      };
+    }
+  });
+
+  return currentLeader.teacher;
+}
+
 /**
  * "render" specifies JSX in the return 
  * @param {*} row data element
@@ -28,17 +46,20 @@ const renderRows = (scoreData) => (row = {}) => {
 
 const BasicTable = ({ data, scoreData }) => {
   return (
-    <table className="basic-table">
-      <tbody>
-        <tr>
-          {getTableHeaders(data[0]).map(
-            headerName => <th key={headerName}>{headerName}</th>
-            )}
-            <th>scores</th>
-        </tr>
-        {data.map(renderRows(scoreData))}
-      </tbody>
-    </table>
+    <div>
+      <h1>{`Current Leader: ${getLeader(scoreData)}`}</h1>
+      <table className="basic-table">
+        <tbody>
+          <tr>
+            {getTableHeaders(data[0]).map(
+              headerName => <th key={headerName}>{headerName}</th>
+              )}
+              <th>scores</th>
+          </tr>
+          {data.map(renderRows(scoreData))}
+        </tbody>
+      </table>
+    </div>
   )
 }
 
