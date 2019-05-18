@@ -15,17 +15,18 @@ const getTableHeaders = (object = {}) => {
  * "render" specifies JSX in the return 
  * @param {*} row data element
  */
-const renderRows = (row = {}) => {
+const renderRows = (scoreData) => (row = {}) => {
   return (
     <tr key={row.id}>
       {Object.values(row).map(
         (value, i) => <td key={i}>{value}</td>
       )}
+      <td>{scoreData[row.teacher]}</td>
     </tr>
   )
 }
 
-const BasicTable = ({ data }) => {
+const BasicTable = ({ data, scoreData }) => {
   return (
     <table className="basic-table">
       <tbody>
@@ -33,8 +34,9 @@ const BasicTable = ({ data }) => {
           {getTableHeaders(data[0]).map(
             headerName => <th key={headerName}>{headerName}</th>
             )}
+            <th>scores</th>
         </tr>
-        {data.map(renderRows)}
+        {data.map(renderRows(scoreData))}
       </tbody>
     </table>
   )

@@ -5,7 +5,7 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 
-import { loadData, clearData } from '../actions';
+import { loadData, clearData, loadScores} from '../actions';
 import Display from './Display';
 
 /**
@@ -14,7 +14,8 @@ import Display from './Display';
  */
 const mapStateToProps = store => {
   return {
-    storeData: store.dataReducer.data
+    storeData: store.dataReducer.data,
+    scoreData: store.dataReducer.scoreData,
   }
 };
 
@@ -28,7 +29,8 @@ const mapDispatchToProps = dispatch => {
     { 
       // add other actions here
       loadData,
-      clearData
+      clearData,
+      loadScores,
     },
     dispatch
   )

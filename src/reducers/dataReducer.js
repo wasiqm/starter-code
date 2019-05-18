@@ -1,7 +1,8 @@
 import { LOAD_DATA, CLEAR_DATA, LOAD_SCORES } from '../types';
 
 const defaultState = {
-  data: []
+  data: [],
+  scoreData: [],
 };
 
 /**
@@ -17,7 +18,7 @@ export default (state = defaultState, action) => {
     case CLEAR_DATA: 
       return Object.assign({}, state, { data: []});
     case LOAD_SCORES:
-      return Object.assign({}, state, { scores: [] });
+      return Object.assign({}, state, { scoreData: action.payload });
     default:
       return state
   }
