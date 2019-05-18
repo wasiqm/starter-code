@@ -1,4 +1,4 @@
-import { LOAD_DATA, CLEAR_DATA } from '../types';
+import { LOAD_DATA, CLEAR_DATA, LOAD_SCORES } from '../types';
 
 /**
  * Actions should be as light weight as possible. No asynchronous processes should be started in actions.
@@ -16,4 +16,9 @@ export const loadData = data => ({
  */
 export const clearData = () => ({
   type: CLEAR_DATA
+});
+
+export const loadScores = data => ({
+  type: LOAD_SCORES,
+  payload: data
 });

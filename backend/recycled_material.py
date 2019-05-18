@@ -13,7 +13,8 @@ class RecycledMaterial:
         'computer_parts',
         'glass',
         'paper',
-        'wood'
+        'wood',
+        'vibranium'
     ]
 
     def write_to_firebase_from_csv(self, filename):

@@ -22,10 +22,14 @@ def get_scores_by_class():
         'batteries', 
         'computer_parts'
     ]
+    bonus_items_times10 = [
+        'vibranium'
+    ]
     meta_fields = [
         'teacher', 
         'id'
     ]
+
     data = [row.to_dict() for row in db_client.get_all_recycling_data()]
     classes = {}
 
@@ -36,6 +40,8 @@ def get_scores_by_class():
             if field not in meta_fields: 
                 if field in bonus_items:
                     score += 2*record[field]
+                elif field in bonus_items_times10:
+                    score += 10*record[field]
                 else: 
                     score += record[field]
 

@@ -21,8 +21,13 @@ class Display extends React.Component {
     fetch('/recycling-data')
       .then(res => res.json())
       .then(json => {
-        this.setState({ dataPostgres: json });
+     this.setState({ dataPostgres: json });
         this.props.loadData(json)
+      });
+    fetch('/scores')
+      .then(res => res.json())
+      .then(json => {
+        this.props.loadScores(json)
       });
   }
 
@@ -57,9 +62,9 @@ class Display extends React.Component {
     return (
       <div className="display-container">
         <h2>Local Data Handling</h2>
-        <BasicTable data={this.state.dataPostgres} />
+        <BasicTable data={this.state.dataPostgres} scoreData={this.props.scoreData} />
         <h2>Global Data Handling</h2>
-        <BasicTable  data={this.props.storeData} />
+        <BasicTable  data={this.props.storeData} scoreData={this.props.scoreData} />
         <h2>Firebase Data (json)</h2>
         {
           Object.entries(this.state.dataFirebase).length === 0
