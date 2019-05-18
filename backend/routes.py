@@ -50,7 +50,7 @@ def get_scores_by_class():
 
     return jsonify(classes)
 
-# Params: New Record
+# Params: (object) { "teacher": "Mrs. Baker", "category": "computer_parts", "amount": 2 }
 # Returns: Score Record Object
 @blueprint.route('/new_entry', methods=['POST'])
 def add_or_update_new_entry():
