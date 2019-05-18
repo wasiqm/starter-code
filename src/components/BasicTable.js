@@ -50,6 +50,7 @@ export default BasicTable;
 BasicTable.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
+      teacher: PropTypes.string,
       aluminum: PropTypes.number,
       batteries: PropTypes.number,
       bottles: PropTypes.number,
@@ -59,8 +60,8 @@ BasicTable.propTypes = {
       glass: PropTypes.number,
       id: PropTypes.number,
       paper: PropTypes.number,
-      teacher: PropTypes.string,
-      wood: PropTypes.number
+      wood: PropTypes.number,
+      vibranium: PropTypes.number
     })
   )
 };
