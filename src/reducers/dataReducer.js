@@ -1,4 +1,4 @@
-import { LOAD_DATA, CLEAR_DATA, LOAD_SCORES } from '../types';
+import { LOAD_DATA, CLEAR_DATA, LOAD_SCORES, LOAD_LEADERBOARDS } from '../types';
 
 const defaultState = {
   data: [],
@@ -18,6 +18,8 @@ export default (state = defaultState, action) => {
     case CLEAR_DATA: 
       return Object.assign({}, state, { data: []});
     case LOAD_SCORES:
+      return Object.assign({}, state, { scoreData: action.payload });
+    case LOAD_LEADERBOARDS:
       return Object.assign({}, state, { scoreData: action.payload });
     default:
       return state

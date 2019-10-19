@@ -5,7 +5,7 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 
-import { loadData, clearData, loadScores} from '../actions';
+import { loadData, clearData, loadScores, loadLeaderboards} from '../actions';
 import Display from './Display';
 
 /**
@@ -16,6 +16,7 @@ const mapStateToProps = store => {
   return {
     storeData: store.dataReducer.data,
     scoreData: store.dataReducer.scoreData,
+    leaderboardsData: store.dataReducer.scoreLeaderboards
   }
 };
 
@@ -31,6 +32,7 @@ const mapDispatchToProps = dispatch => {
       loadData,
       clearData,
       loadScores,
+      loadLeaderboards
     },
     dispatch
   )

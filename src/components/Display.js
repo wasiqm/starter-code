@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import BasicTable from './BasicTable';
+import LeaderboardTable from './LeaderboardTable';
 import firebase from 'firebase';
 import 'firebase/firestore';
 
@@ -29,6 +30,11 @@ class Display extends React.Component {
       .then(json => {
         this.props.loadScores(json)
       });
+    fetch('/leaderboards')
+    .then(res => res.json())
+    .then(json => {
+      this.props.loadLeaderboards(json)
+    });
   }
 
   fetchDataFirebase = () => {
@@ -65,7 +71,7 @@ class Display extends React.Component {
         <BasicTable data={this.state.dataPostgres} scoreData={this.props.scoreData} />
         <h2>Global Data Handling</h2>
         <BasicTable  data={this.props.storeData} scoreData={this.props.scoreData} />
-        <h2>Firebase Data (json)</h2>
+        <LeaderboardTable  data={this.props.storeData} scoreData={this.props.scoreData} />
         {
           Object.entries(this.state.dataFirebase).length === 0
             ? "**Firebase not set up**"

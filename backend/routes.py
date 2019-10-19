@@ -95,3 +95,45 @@ def add_or_update_new_entry():
         print('Invalid Amount or Category')
     except KeyError:
         print('Invalid request params')
+
+def compute_scores():
+    
+    bonus_items = [
+        'batteries', 
+        'computer_parts'
+    ]
+    bonus_items_times10 = [
+        'vibranium'
+    ]
+    meta_fields = [
+        'teacher', 
+        'id'
+    ]
+
+    data = [row.to_dict() for row in db_client.get_all_recycling_data()]
+    classes = {}
+
+    for record in data:
+        score = 0
+        teacher = record['teacher']
+        for field in record: 
+            if field not in meta_fields: 
+                if field in bonus_items:
+                    score += 2*record[field]
+                elif field in bonus_items_times10:
+                    score += 10*record[field]
+                else: 
+                    score += record[field]
+
+        if teacher in classes: classes[teacher] += score
+        else: classes[teacher] = score
+    return classes
+
+# Params: None
+# Returns: Leaderboard Object
+@blueprint.route('/leaderboards')
+def get_leaderboards():
+    score_data = compute_scores()
+    #print("Score data type", type(score_data))
+    full_leaderboard = sorted(score_data.items(), key=lambda kv: kv[1], reverse = True)
+    return jsonify(full_leaderboard[0:3])
